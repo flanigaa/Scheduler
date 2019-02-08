@@ -1,11 +1,23 @@
-// Class to hold a single time with day of week without date
+import java.time.*;
+
+// Class to hold a single time with day of week with or without date
 public class Time implements Comparable<Time> {
 
+  protected LocalDate date;
   protected int day;
   protected int hour;
   protected int minute;
 
   public Time(int aDay, int anHour, int aMinute) {
+    this.day = aDay;
+    if (anHour >= 0 && anHour <= 23)
+      this.hour = anHour;
+    if (aMinute >= 0 && aMinute <= 59)
+      this.minute = aMinute;
+  }
+
+  public Time(LocalDate aDate, int aDay, int anHour, int aMinute) {
+    this.date = aDate;
     this.day = aDay;
     if (anHour >= 0 && anHour <= 23)
       this.hour = anHour;
@@ -28,6 +40,14 @@ public class Time implements Comparable<Time> {
    * @return      returns the difference of times
    */
   public int compareTo(Time other) {
+    // if both times have a date, return the difference if there is one, else
+    // continue with standard comparison
+    if (this.date != null && other.date != null) {
+      if (this.date.compareTo(other.date) != 0) {
+        return this.date.compareTo(other.date);
+      }
+    }
+
     boolean nextDay = DayOfWeek.isNextDay(this.day, other.day);
 
     // if other day is not the day after this day and days aren't the same
@@ -48,7 +68,15 @@ public class Time implements Comparable<Time> {
     }
   }
 
-  /**
+	/**
+	* Returns value of date
+	* @return
+	*/
+	public LocalDate getDate() {
+		return this.date;
+	}
+
+	/**
 	* Returns value of day
 	* @return
 	*/
@@ -70,6 +98,14 @@ public class Time implements Comparable<Time> {
 	*/
 	public int getMinute() {
 		return this.minute;
+	}
+
+	/**
+	* Sets new value of date
+	* @param
+	*/
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 	/**
