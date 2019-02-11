@@ -13,6 +13,10 @@ public class TaskList {
     this.tasks = list;
   }
 
+  public void addTask(Task newTask) {
+    this.tasks.add(newTask);
+  }
+
   /**
    * Returns the full list of tasks
    * @return list of all tasks

@@ -1,5 +1,11 @@
 public class Main {
   public static void main(String[] args) {
+    TaskCalendar cal = new TaskCalendar();
+    cal.plusMonths(18);
+    System.out.println(cal.getWeeksInMonth());
+  }
+
+  public void timeRangeTest() {
     Time timeA = new Time(DayOfWeek.TUESDAY, 14, 30);
     Time timeB = new Time(DayOfWeek.TUESDAY, 16, 30);
 
